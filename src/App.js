@@ -22,7 +22,6 @@ function PersonList(){
   },
   {
     id:"102",
-
     name:"Miya",
   age:"27",
   city:"Delhi"
