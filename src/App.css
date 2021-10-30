@@ -15,10 +15,14 @@ overflow: auto;
     width: 240px;
     object-fit:fill;
     }
+    .movie-show-button{
+        margin-top: 10px;
+        font-size: 18px;
+    }
 .movie-container{
     height: 500px;
     width: 240px;
-    background-color: blanchedalmond;
+    background-color: rgb(220, 230, 235);
     padding: 10px;
 }
 .movie-specs{

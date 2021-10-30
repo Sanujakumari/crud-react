@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import {useState} from "react";
+import { margin } from '@mui/system';
 
 function App(){
   const users=[
@@ -18,15 +19,41 @@ function App(){
         <Msg name={user.name} pic={user.pic} />
       ))} */}
      {/* < MovieList /> */}
-     <ColorBox />
+     <ColorList />
     </div>
   );
 }
-function ColorBox(){
-  const styles={backgroundColor :"crimson"}
-  return <input style={styles} placeholder="Enter a color" />
+
+function ColorList(){
+  const [color,setColor]=useState("")
+  const styles={backgroundColor :color, color:"black"}
+  const INITIAL_COLORS=["crimson","teal","olive"];
+  const [colors,setColors]=useState(INITIAL_COLORS);
+  return (
+    <div>
+  <input
+  value={color}
+  style={styles}
+  onChange={(event)=>setColor(event.target.value)}
+  placeholder="Enter a color"
+ />
+ <button onClick={()=>setColors([...colors,color])}>Add New Colour</button>
+ {colors.map((clr,index)=>(
+ <ColorBox key={index} color={clr}/>
+ ))}
+ </div>
+  )
 }
 
+function ColorBox({color}){
+  const styles={
+    height:"70px",
+    width:"100vh",
+    background:color,
+    margin:"10px 0px"
+  }
+  return <div style={styles}></div>
+}
 
 function MovieList(){
   const movies= [
@@ -63,8 +90,9 @@ function MovieList(){
   ]
 return(
   <div className="movie-list">
-      {movies.map((mv)=>(
-    <Movie 
+      {movies.map((mv,index)=>(
+    <Movie
+    key={index} 
       name={mv.name} 
       poster={mv.poster}
       rating={mv.rating} 
@@ -72,9 +100,11 @@ return(
     ))}
     </div>
 )
-
 }
+
 function Movie({name,poster,rating,summary}){
+  const [show,setShow]=useState(false);
+  // const styles={display: show? "block":"none"}
   return(
     <div className="movie-container">
       <img className="movie-poster" src={poster} alt={name} />
@@ -83,7 +113,9 @@ function Movie({name,poster,rating,summary}){
         <p className="movie-rating">⭐{rating} </p>
      </div>
      <Counter />
-     <p>{summary}</p>
+     <button onClick={()=>setShow(!show)} className="movie-show-button">
+       {show ? "Hide" : "Show" } Description</button>
+    {show ?<p>{summary}</p>:""} 
     </div>
   )
 }
@@ -107,4 +139,5 @@ return(
   </div>
 );
 }
+
 export default App;
