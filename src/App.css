@@ -1,37 +1,32 @@
-
-
 body{
-    /* height: 100vh; */
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 .movie-list{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    /* padding: 10px; */
     margin: 10px;
     gap: 10px;
     flex-wrap: wrap;
-/* width: 500px; */
 overflow: auto;
 }
 .movie-poster{
     height: 240px;
     width: 240px;
     object-fit:fill;
-    /* margin: 10px; */
-    /* justify-content: space-evenl; */
-}
+    }
 .movie-container{
     height: 500px;
     width: 240px;
     background-color: blanchedalmond;
     padding: 10px;
-
-
 }
 .movie-specs{
     display: flex;
     align-items: center;
     justify-content:space-between ;
 }
+.like-dislike{
+    display: flex;
+    align-items: center;
+   }

@@ -3,6 +3,32 @@ import './App.css';
 import {useState} from "react";
 
 function App(){
+  const users=[
+    {
+    name:"donaldo",
+     pic:"https://media.newyorker.com/photos/5cf81a2b78887298005c996a/4:3/w_2560,h_1920,c_limit/KidLit-DonaldDuck.jpg"  },
+    {
+    name:"mickey",
+    pic:"https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Mickey_Mouse.png/220px-Mickey_Mouse.png"
+  },
+  ];
+  return(
+    <div className="App">
+      {/* {users.map((user)=>(
+        <Msg name={user.name} pic={user.pic} />
+      ))} */}
+     {/* < MovieList /> */}
+     <ColorBox />
+    </div>
+  );
+}
+function ColorBox(){
+  const styles={backgroundColor :"crimson"}
+  return <input style={styles} placeholder="Enter a color" />
+}
+
+
+function MovieList(){
   const movies= [
     {
     name:"Coco",
@@ -35,57 +61,40 @@ function App(){
     summary:"After gaining superpowers from a spider bite, Miles Morales protects the city as Spider-Man. Soon, he meets alternate versions of himself and gets embroiled in an epic battle to save the multiverse."
   }
   ]
-const users=[
-  {
-    name:"donaldo",
-pic:"https://media.newyorker.com/photos/5cf81a2b78887298005c996a/4:3/w_2560,h_1920,c_limit/KidLit-DonaldDuck.jpg"  },
-  {
-  name:"mickey",
-  pic:"https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Mickey_Mouse.png/220px-Mickey_Mouse.png"
-},
-
-];
-  return(
-    <div className="App">
-      {/* {users.map((user)=>(
-        <Msg name={user.name} pic={user.pic} />
-      ))} */}
-      <div className="movie-list">
+return(
+  <div className="movie-list">
       {movies.map((mv)=>(
-<Movie name={mv.name} 
- poster={mv.poster}
-  rating={mv.rating} 
-  summary={mv.summary}/>
-))}
-</div>
-
+    <Movie 
+      name={mv.name} 
+      poster={mv.poster}
+      rating={mv.rating} 
+      summary={mv.summary}/>
+    ))}
     </div>
-  );
+)
+
 }
 function Movie({name,poster,rating,summary}){
- 
-
-  
   return(
     <div className="movie-container">
       <img className="movie-poster" src={poster} alt={name} />
       <div className="movie-specs">
-     <h3>{name}</h3>
-     <p>⭐{rating} </p>
+        <h3 className="movie-name">{name}</h3>
+        <p className="movie-rating">⭐{rating} </p>
      </div>
      <Counter />
-
      <p>{summary}</p>
     </div>
   )
 }
+
 function Counter(){
   const [like,setLike] =useState(0);
   const [dislike,setDislike] =useState(0);
   return(
     <div className="like-dislike">
       <button onClick={()=>setLike(like+1)}>👍{like}</button>
-          <button onClick={()=>setDislike(dislike+1)}>👎{dislike}</button>
+      <button onClick={()=>setDislike(dislike+1)}>👎{dislike}</button>
     </div>
   )
   }
@@ -94,7 +103,7 @@ function Msg({name, pic}){
 return(
   <div>
     <img height="100" src={pic} alt={name}/>
-<h1 className ="name" > Hi, {name}</h1>
+    <h1 className ="name" > Hi, {name}</h1>
   </div>
 );
 }
