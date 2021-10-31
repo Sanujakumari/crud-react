@@ -5,7 +5,7 @@ body{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin: 10px;
+    /* margin: 10px; */
     gap: 10px;
     flex-wrap: wrap;
 overflow: auto;
@@ -16,21 +16,42 @@ overflow: auto;
     object-fit:fill;
     }
     .movie-show-button{
-        margin-top: 10px;
+        margin-left: 10px;
         font-size: 18px;
+
+    }
+    .add-movie-form{
+        display: flex;
+        flex-direction: column;
+        gap:10px;
+        margin: 10px;
+        
+    }
+    .counter_container{
+        display: block;
+        /* flex-direction: column; */
+        gap:10px;
     }
 .movie-container{
-    height: 500px;
+    height: 550px;
     width: 240px;
     background-color: rgb(220, 230, 235);
-    padding: 10px;
+    margin: 0px;
+}
+.movie-detail-container{
+    max-width: 50rem;
 }
 .movie-specs{
     display: flex;
     align-items: center;
+    /* background-color: bisque; */
     justify-content:space-between ;
 }
 .like-dislike{
     display: flex;
     align-items: center;
+    justify-content: space-around;
+   }
+   .movie-name{
+       margin: 0px;
    }

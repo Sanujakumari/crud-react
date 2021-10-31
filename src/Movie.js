@@ -5,9 +5,12 @@ import CardContent from '@mui/material/CardContent';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { Counter } from "./Counter";
+import InfoIcon from '@mui/icons-material/Info';
+import { useHistory } from "react-router-dom";
 
-export function Movie({ name, poster, rating, summary }) {
+export function Movie({ name, poster, rating, summary ,id}) {
   const [show, setShow] = useState(true);
+  const history=useHistory();
   // const styles={display: show? "block":"none"}
   return (
     <Card>
@@ -17,7 +20,14 @@ export function Movie({ name, poster, rating, summary }) {
 
           <div className="movie-specs">
             <h3 className="movie-name">{name}{""}
+            <IconButton
+            onClick={()=>history.push("/movies/" + id)}
+                color="primary"
+                aria-label={"showbutton"}>
+               < InfoIcon/>
+              </IconButton>
               <IconButton
+              className="movie-show-button"
                 onClick={() => setShow(!show)}
                 color="primary"
                 aria-label={show ? "Hide" : "Show"}>

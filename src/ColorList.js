@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ColorBox } from './ColorBox';
 
-function ColorList() {
+ export function ColorList() {
   const [color, setColor] = useState("");
   const styles = { backgroundColor: color, color: "black" };
   const INITIAL_COLORS = ["crimson", "teal", "olive"];
