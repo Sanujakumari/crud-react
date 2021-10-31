@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import { margin } from '@mui/system';
 import { MovieList } from './MovieList';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 
 function App(){
