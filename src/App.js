@@ -1,7 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
-import {useState} from "react";
 import { margin } from '@mui/system';
+import { MovieList } from './MovieList';
+
 
 function App(){
   const users=[
@@ -18,126 +19,10 @@ function App(){
       {/* {users.map((user)=>(
         <Msg name={user.name} pic={user.pic} />
       ))} */}
-     {/* < MovieList /> */}
-     <ColorList />
+     < MovieList />
+     {/* <ColorList /> */}
     </div>
   );
-}
-
-function ColorList(){
-  const [color,setColor]=useState("")
-  const styles={backgroundColor :color, color:"black"}
-  const INITIAL_COLORS=["crimson","teal","olive"];
-  const [colors,setColors]=useState(INITIAL_COLORS);
-  return (
-    <div>
-  <input
-  value={color}
-  style={styles}
-  onChange={(event)=>setColor(event.target.value)}
-  placeholder="Enter a color"
- />
- <button onClick={()=>setColors([...colors,color])}>Add New Colour</button>
- {colors.map((clr,index)=>(
- <ColorBox key={index} color={clr}/>
- ))}
- </div>
-  )
-}
-
-function ColorBox({color}){
-  const styles={
-    height:"70px",
-    width:"100vh",
-    background:color,
-    margin:"10px 0px"
-  }
-  return <div style={styles}></div>
-}
-
-function MovieList(){
-  const movies= [
-    {
-    name:"Coco",
-    poster:"https://lumiere-a.akamaihd.net/v1/images/p_coco_19736_fd5fa537.jpeg?region=0%2C0%2C540%2C810",
-    rating:"8.4",
-    summary:"Miguel pursues his love for singing in spite of his family's ban on music. He stumbles into the Land of the Dead, where he learns about his great-great-grandfather who was a legendary singer."
-  },
-  {
-    name:"Ratatouille",
-    poster:"https://lumiere-a.akamaihd.net/v1/images/p_ratatouille_19736_0814231f.jpeg",
-    rating:"8",
-    summary:"Remy, a rat, aspires to become a renowned French chef. However, he fails to realise that people despise rodents and will never enjoy a meal cooked by him."
-  },
-  {
-    name:"Luca",
-    poster:"https://www.cinema.com/image_lib/16701_poster4.jpg",
-    rating:"7.5",
-    summary:"Luca shares these adventures with his newfound best friend, but all the fun is threatened by a deeply held secret: he is a sea monster from another world just below the water's surface"
-  },
-  {
-    name:"Disney Frozen",
-    poster:"https://lumiere-a.akamaihd.net/v1/images/p_frozen_18373_3131259c.jpeg",
-    rating:"7.4",
-    summary:"Anna sets out on a journey with an iceman, Kristoff, and his reindeer, Sven, in order to find her sister, Elsa, who has the power to convert any object or person into ice."
-  },
-  {
-    name:"Spider-Man",
-    poster:"https://www.sonypictures.com/sites/default/files/styles/max_560x840/public/title-key-art/spiderman_verse_rating_0.jpg?itok=N_U_lGHQ",
-    rating:"8.4",
-    summary:"After gaining superpowers from a spider bite, Miles Morales protects the city as Spider-Man. Soon, he meets alternate versions of himself and gets embroiled in an epic battle to save the multiverse."
-  }
-  ]
-return(
-  <div className="movie-list">
-      {movies.map((mv,index)=>(
-    <Movie
-    key={index} 
-      name={mv.name} 
-      poster={mv.poster}
-      rating={mv.rating} 
-      summary={mv.summary}/>
-    ))}
-    </div>
-)
-}
-
-function Movie({name,poster,rating,summary}){
-  const [show,setShow]=useState(false);
-  // const styles={display: show? "block":"none"}
-  return(
-    <div className="movie-container">
-      <img className="movie-poster" src={poster} alt={name} />
-      <div className="movie-specs">
-        <h3 className="movie-name">{name}</h3>
-        <p className="movie-rating">⭐{rating} </p>
-     </div>
-     <Counter />
-     <button onClick={()=>setShow(!show)} className="movie-show-button">
-       {show ? "Hide" : "Show" } Description</button>
-    {show ?<p>{summary}</p>:""} 
-    </div>
-  )
-}
-
-function Counter(){
-  const [like,setLike] =useState(0);
-  const [dislike,setDislike] =useState(0);
-  return(
-    <div className="like-dislike">
-      <button onClick={()=>setLike(like+1)}>👍{like}</button>
-      <button onClick={()=>setDislike(dislike+1)}>👎{dislike}</button>
-    </div>
-  )
-  }
-
-function Msg({name, pic}){
-return(
-  <div>
-    <img height="100" src={pic} alt={name}/>
-    <h1 className ="name" > Hi, {name}</h1>
-  </div>
-);
 }
 
 export default App;
