@@ -75,13 +75,18 @@ function App(){
           <li><Link to="/movies">Movies</Link></li>
           <li><Link to="/movies/add">Add Movie</Link></li>
           <li><Link to="/color-game">Color Game</Link></li>
+          <li><Link to="/tictactoe">Tic Tac Toe Game</Link></li>
 
         </ul>
       </nav>
       <Switch>
       <Route exact path="/">
         < Welcome />
-        <MovieDetails/>
+        {/* <MovieDetails/> */}
+        </Route>
+        <Route path="/tictactoe">
+       <        TicTacToe/>
+
         </Route>
         <Route path="/films">
           <  Redirect to ="/movies" />
@@ -116,7 +121,8 @@ function MovieDetails({movies}){
   // object destructuring {id}
   const {id}=useParams();
   const movie=movies[id]
-return <div>
+return (
+<div>
   <iframe 
   width="100%"
    height="360" 
@@ -128,16 +134,17 @@ return <div>
    </iframe>
 
 
- <div className="movie-detail-container">
+<div className="movie-detail-container">
 
-   <div className="movie-specs">
-     <h3 className="movie-name">{movie.name}</h3>
-     <p className="movie-rating">⭐{movie.rating} </p>
-   </div>
-   <p>{movie.summary}</p>
-   </div>
-   </div>
-}
+    <div className="movie-specs">
+      <h3 className="movie-name">{movie.name}</h3>
+      <p className="movie-rating">⭐{movie.rating} </p>
+    </div>
+    <p>{movie.summary}</p>
+    </div>
+    </div>
+    )
+ }
 function NotFound(){
   return( 
   <div>
@@ -149,6 +156,76 @@ function NotFound(){
 }
 function Welcome(){
   return <h1>Welcome</h1>
+}
+function TicTacToe(){
+  return <Game />
+}
+function Game(){
+  const[board,setBoard]=useState([null,null,null,null,null,null,null,null,null])
+
+const decideWinner=(board)=>{
+  const lines=[
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6],
+  ];
+ for(let i=0;i<lines.length;i++){
+   const [a,b,c]=lines[i];
+   if(board[a]!==null && 
+     board[a]===board[b]&&
+     board[a]===board[c]) {
+console.log("Winner", board[a])
+return board[a] //if winner ,it return "X" or "O"
+   }
+ }
+return null; //if no winner 
+}
+const winner = decideWinner(board)
+
+  const[isXTurn,setIsXTurn]=useState(true)
+ const handleClick=(index)=>{
+   //if no winner and is untouched then update it
+  if(!winner && !board[index]) {
+    const boardCopy =[...board]
+    boardCopy[index]= isXTurn ? "X" : "O";
+    setBoard(boardCopy);
+    setIsXTurn(!isXTurn);
+  }
+   }
+   const restart =()=>{
+     setBoard([null,null,null,null,null,null,null,null,null])
+  setIsXTurn(true);
+    }
+return(
+  <div className="full-game">
+  <div className="board">
+    {board.map((val,index)=>(
+    <GameBox val={val} onPlayerClick={()=>handleClick(index)} />
+    ))}
+  </div>
+     {winner ? <h1>Winner is {winner} </h1>: "DRAW"}
+      <button onClick={restart}>RESTART</button>
+      </div>
+);
+}
+
+function GameBox({val,onPlayerClick}){
+// const [value,setValue]=useState(val);
+const styles={color:val=="X" ? "green" : "red"}
+return(
+  <div 
+  style={styles}
+  onClick={onPlayerClick}
+className="game-box"
+>
+  {val} 
+   </div>
+)
 }
 
 export default App;
