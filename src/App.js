@@ -12,6 +12,7 @@ import {useParams,useHistory} from "react-router-dom"
 import Button from '@mui/material/Button';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import {EditMovie} from "./EditMovie"
 function App(){
   const users=[
     {
@@ -101,8 +102,12 @@ function App(){
         <Route path="/movies/:id">
         <MovieDetails movies={movies} />
         </Route>
+        <Route path="/movies/edit/:id">
+        <EditMovie movies={movies} setMovies={setMovies}/>   
+
+        </Route>
         <Route path="/movies">
-        < MovieList movies={movies}/>
+        < MovieList movies={movies} setMovies={setMovies}/>
 
         </Route>
         
@@ -135,10 +140,7 @@ return (
     frameborder="0" 
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
    </iframe>
-
-
 <div className="movie-detail-container">
-
     <div className="movie-specs">
       <h3 className="movie-name">{movie.name}</h3>
       <p className="movie-rating">⭐{movie.rating} </p>
@@ -243,7 +245,7 @@ return(
 
 function GameBox({val,onPlayerClick}){
 // const [value,setValue]=useState(val);
-const styles={color:val=="X" ? "green" : "red"}
+const styles={color:val==="X" ? "green" : "red"}
 return(
   <div 
   style={styles}

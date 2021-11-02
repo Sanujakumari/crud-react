@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
-export function AddMovie({ movies, setMovies }) {
+export function EditMovie({ movies, setMovies }) {
   const [name, setName] = useState("");
   const [poster, setPoster] = useState("");
   const [rating, setRating] = useState("");
@@ -29,32 +29,7 @@ export function AddMovie({ movies, setMovies }) {
   };
   return (
     <div className="add-movie-form">
-      {/* <input
-                 value={name}
-                placeholder="Name"
-                onChange={(event)=>setName(event.target.value)}
-                   /> */}
-      {/* <input
-               value={name}
-              placeholder="Name"
-              onChange={setMovieName}
-                 />
-             <input
-                 value={poster}
-              placeholder="Poster-url"
-              onChange={setMoviePoster}
-                  />
-             <input
-              value={rating}
-              placeholder="Rating"
-              onChange={setMovieRating}
-                  />
-                  
-             <input
-              value={summary}
-              placeholder="Summary"
-              onChange={setMovieSummary}
-                 /> */}
+     
       <TextField
         value={name}
         label="Name"
