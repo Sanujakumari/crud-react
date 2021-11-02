@@ -57,6 +57,7 @@ overflow: auto;
    }
    .board{
        display:grid;
+       background-color:peachpuff;
        grid-template-columns: repeat(3,1fr);
        width:min-content;
    }
@@ -64,10 +65,13 @@ overflow: auto;
        display: flex;
        flex-direction: column;
        align-items: center;
-       background-color: blanchedalmond;
+       background-color: mistyrose;
        min-height: 100vh;
        justify-content: center;
    }
+   .winner-poster{
+       height: 400px;
+  }
    .game-box{
        height: 8rem;
        width: 8rem;

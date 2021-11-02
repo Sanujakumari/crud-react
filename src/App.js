@@ -9,6 +9,9 @@ import {Switch, Route, Link,Redirect}  from "react-router-dom";
 import {AddMovie} from "./AddMovie";
 import {useState} from "react"
 import {useParams} from "react-router-dom"
+import Button from '@mui/material/Button';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+
 function App(){
   const users=[
     {
@@ -141,6 +144,7 @@ return (
       <p className="movie-rating">⭐{movie.rating} </p>
     </div>
     <p>{movie.summary}</p>
+    
     </div>
     </div>
     )
@@ -174,6 +178,8 @@ const decideWinner=(board)=>{
     [0,4,8],
     [2,4,6],
   ];
+
+  
  for(let i=0;i<lines.length;i++){
    const [a,b,c]=lines[i];
    if(board[a]!==null && 
@@ -186,6 +192,7 @@ return board[a] //if winner ,it return "X" or "O"
 return null; //if no winner 
 }
 const winner = decideWinner(board)
+const pic="https://cdn4.vectorstock.com/i/thumb-large/21/28/receiving-the-cartoon-achievement-game-screen-vector-24072128.jpg"
 
   const[isXTurn,setIsXTurn]=useState(true)
  const handleClick=(index)=>{
@@ -207,9 +214,18 @@ return(
     {board.map((val,index)=>(
     <GameBox val={val} onPlayerClick={()=>handleClick(index)} />
     ))}
+
   </div>
-     {winner ? <h1>Winner is {winner} </h1>: "DRAW"}
-      <button onClick={restart}>RESTART</button>
+  {isXTurn ? <h1>Turn of X</h1>:<h1>Turn of O</h1>}
+
+     {winner ? <div><img className="winner-poster" src={pic} alt={winner} />
+<h1> Winner is {winner} </h1></div>: " "}
+      {/* <button onClick={restart}>RESTART</button> */}
+      <Button variant="contained" 
+       onClick={restart}>
+      <RestartAltIcon />
+      RESTART</Button>
+
       </div>
 );
 }
