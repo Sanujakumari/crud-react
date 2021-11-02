@@ -13,6 +13,19 @@ import Button from '@mui/material/Button';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import {EditMovie} from "./EditMovie"
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import { ThemeProvider, useTheme, createTheme } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import HomeIcon from '@mui/icons-material/Home';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import TheatersIcon from '@mui/icons-material/Theaters';
+import AddIcon from '@mui/icons-material/Add';
+import PaletteIcon from '@mui/icons-material/Palette';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+
 function App(){
   const users=[
     {
@@ -69,11 +82,41 @@ function App(){
         trailer:"https://www.youtube.com/embed/WgU7P6o-GkM" 
       },
   ];
+  const [mode,setMode]=useState("dark")
   const [movies, setMovies] = useState(INITIAL_MOVIES);
-  
+  const history=useHistory();
+  const theme = createTheme({
+    palette: {
+      mode: mode,
+    },
+  });
   return(
+    <ThemeProvider theme={theme}>
+<Paper style={{minHeight:"100vh"}}elevation={2}>
+
     <div className="App">
-      <nav>
+       <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+        <Button startIcon={<HomeIcon />} onClick={()=>history.push("/")} color="inherit">Home</Button>
+        <Button startIcon={<TheatersIcon />}
+        onClick={()=>history.push("/movies")} color="inherit">Movies</Button>
+        <Button startIcon={<AddIcon />}
+        onClick={()=>history.push("/movies/add")} color="inherit">Add Movie</Button>
+        <Button startIcon={<PaletteIcon />}
+        onClick={()=>history.push("/color-game")} color="inherit">Color Game</Button>
+        <Button startIcon={<SportsEsportsIcon />}
+        onClick={()=>history.push("/tictactoe")} color="inherit">Tic Tac Toe Game</Button>
+        <Button startIcon={mode=="light"? <Brightness4Icon />: <LightModeOutlinedIcon />}
+         onClick={()=>setMode(mode=="light"? "dark":"light")}
+        style={{marginLeft:"auto"}} color="inherit"> 
+        {mode=="light"? "dark":"light"}mode
+        </Button>
+
+        </Toolbar>
+      </AppBar>
+    </Box>
+      {/* <nav>
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/movies">Movies</Link></li>
@@ -82,7 +125,7 @@ function App(){
           <li><Link to="/tictactoe">Tic Tac Toe Game</Link></li>
 
         </ul>
-      </nav>
+      </nav> */}
       <Switch>
       <Route exact path="/">
         < Welcome />
@@ -123,6 +166,8 @@ function App(){
       ))} */}
      {/* <ColorList /> */}
     </div>
+    </Paper>
+    </ThemeProvider>
   );
 }
 function MovieDetails({movies}){
@@ -165,13 +210,15 @@ function NotFound(){
     )
 }
 function Welcome(){
-  return <h1>Welcome</h1>
+  return <h1 className="welcome"> Hi All !!! Welcome to my app</h1>
 }
 function TicTacToe(){
   return <Game  />
 }
 function Game(){
   const[board,setBoard]=useState([null,null,null,null,null,null,null,null,null])
+  const history=useHistory();
+
 const decideWinner=(board)=>{
   const lines=[
     [0,1,2],
@@ -214,7 +261,7 @@ const pic="https://cdn4.vectorstock.com/i/thumb-large/21/28/receiving-the-cartoo
     }
 return(
   <div className="full-game">
-      <h1 className="header">Welcome to TicTacToe</h1>
+      <h3 className="header">Welcome to TicTacToe</h3>
 
   <div className="board">
     {board.map((val,index)=>(
@@ -224,12 +271,14 @@ return(
   </div>
   {/* <h1 className="header">Welcome to TicTacToe</h1> */}
 
-  {isXTurn ? <h1>Turn of X</h1>:<h1>Turn of O</h1>}
+  {isXTurn ? <h4>Turn of X</h4>:<h4>Turn of O</h4>}
 
      {winner ? <div><img className="winner-poster" src={pic} alt={winner} />
-<h1> Winner is {winner} </h1></div>: " "}
+<h2> Winner is {winner} </h2></div>: " "}
       {/* <button onClick={restart}>RESTART</button> */}
+      
       <div>
+
       <Button variant="contained" onClick={()=> setIsXTurn(true)}>X</Button>
       <Button variant="contained" onClick={()=> setIsXTurn(false)}>O</Button>
       </div>
@@ -238,7 +287,10 @@ return(
       <RestartAltIcon />
       RESTART</Button>
       
-
+      <Button variant="contained"
+    onClick={()=>history.goBack()}
+    startIcon={<ArrowBackIosIcon />}>
+      BACK</Button>
       </div>
 );
 }

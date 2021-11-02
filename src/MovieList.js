@@ -22,6 +22,7 @@ export function MovieList({movies,setMovies}) {
             id={index}
            DeleteMovieButton={
             <IconButton
+
             className="movie-show-button"
               onClick={() =>{
                 console.log(index,movies)
