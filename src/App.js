@@ -8,10 +8,10 @@ import ReactDOM from "react-dom"
 import {Switch, Route, Link,Redirect}  from "react-router-dom"; 
 import {AddMovie} from "./AddMovie";
 import {useState} from "react"
-import {useParams} from "react-router-dom"
+import {useParams,useHistory} from "react-router-dom"
 import Button from '@mui/material/Button';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
-
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 function App(){
   const users=[
     {
@@ -88,7 +88,7 @@ function App(){
         {/* <MovieDetails/> */}
         </Route>
         <Route path="/tictactoe">
-       <        TicTacToe/>
+       <  TicTacToe />
 
         </Route>
         <Route path="/films">
@@ -124,6 +124,7 @@ function MovieDetails({movies}){
   // object destructuring {id}
   const {id}=useParams();
   const movie=movies[id]
+  const history=useHistory();
 return (
 <div>
   <iframe 
@@ -133,7 +134,6 @@ return (
    title="YouTube video player"
     frameborder="0" 
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-
    </iframe>
 
 
@@ -144,7 +144,11 @@ return (
       <p className="movie-rating">⭐{movie.rating} </p>
     </div>
     <p>{movie.summary}</p>
-    
+    <Button variant="contained"
+    onClick={()=>history.goBack()}
+    startIcon={<ArrowBackIosIcon />}>
+      BACK</Button>
+
     </div>
     </div>
     )
@@ -162,11 +166,10 @@ function Welcome(){
   return <h1>Welcome</h1>
 }
 function TicTacToe(){
-  return <Game />
+  return <Game  />
 }
 function Game(){
   const[board,setBoard]=useState([null,null,null,null,null,null,null,null,null])
-
 const decideWinner=(board)=>{
   const lines=[
     [0,1,2],
@@ -178,7 +181,6 @@ const decideWinner=(board)=>{
     [0,4,8],
     [2,4,6],
   ];
-
   
  for(let i=0;i<lines.length;i++){
    const [a,b,c]=lines[i];
@@ -210,21 +212,30 @@ const pic="https://cdn4.vectorstock.com/i/thumb-large/21/28/receiving-the-cartoo
     }
 return(
   <div className="full-game">
+      <h1 className="header">Welcome to TicTacToe</h1>
+
   <div className="board">
     {board.map((val,index)=>(
     <GameBox val={val} onPlayerClick={()=>handleClick(index)} />
     ))}
 
   </div>
+  {/* <h1 className="header">Welcome to TicTacToe</h1> */}
+
   {isXTurn ? <h1>Turn of X</h1>:<h1>Turn of O</h1>}
 
      {winner ? <div><img className="winner-poster" src={pic} alt={winner} />
 <h1> Winner is {winner} </h1></div>: " "}
       {/* <button onClick={restart}>RESTART</button> */}
+      <div>
+      <Button variant="contained" onClick={()=> setIsXTurn(true)}>X</Button>
+      <Button variant="contained" onClick={()=> setIsXTurn(false)}>O</Button>
+      </div>
       <Button variant="contained" 
        onClick={restart}>
       <RestartAltIcon />
       RESTART</Button>
+      
 
       </div>
 );

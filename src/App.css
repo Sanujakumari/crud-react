@@ -72,6 +72,9 @@ overflow: auto;
    .winner-poster{
        height: 400px;
   }
+  .header{
+      display: flex;
+  }
    .game-box{
        height: 8rem;
        width: 8rem;
