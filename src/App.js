@@ -25,6 +25,9 @@ import TheatersIcon from '@mui/icons-material/Theaters';
 import AddIcon from '@mui/icons-material/Add';
 import PaletteIcon from '@mui/icons-material/Palette';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import Confetti from 'react-confetti'
+
+
 
 function App(){
   const users=[
@@ -274,7 +277,7 @@ return(
   {isXTurn ? <h4>Turn of X</h4>:<h4>Turn of O</h4>}
 
      {winner ? <div><img className="winner-poster" src={pic} alt={winner} />
-<h2> Winner is {winner} </h2></div>: " "}
+<h2> Winner is {winner}  <Confetti/></h2></div>: " "}
       {/* <button onClick={restart}>RESTART</button> */}
       
       <div>
