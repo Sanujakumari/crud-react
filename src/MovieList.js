@@ -60,7 +60,7 @@ export function MovieList() {
 
               color="secondary"
               aria-label="edit">
-            < EditIcon />
+            <EditIcon />
             </IconButton>
            }
           />

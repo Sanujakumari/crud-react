@@ -8,9 +8,8 @@ import ReactDOM from "react-dom"
 import {Switch, Route, Link,Redirect}  from "react-router-dom"; 
 import {AddMovie} from "./AddMovie";
 import {useState,useEffect} from "react"
-import {useParams,useHistory} from "react-router-dom"
+import {useHistory} from "react-router-dom"
 import Button from '@mui/material/Button';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import {EditMovie} from "./EditMovie"
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -27,7 +26,8 @@ import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import { Welcome } from './Welcome';
 import { NotFound } from './NotFound';
 import { TicTacToe } from './TicTacToe';
-
+import { MovieDetails } from './MovieDetails.1';
+import {BasicForm} from './BasicForm';
 
 
 function App(){
@@ -116,6 +116,8 @@ function App(){
         onClick={()=>history.push("/color-game")} color="inherit">Color Game</Button>
         <Button startIcon={<SportsEsportsIcon />}
         onClick={()=>history.push("/tictactoe")} color="inherit">Tic Tac Toe Game</Button>
+         <Button startIcon={<AddIcon />}
+        onClick={()=>history.push("/form")} color="inherit">FORM</Button>
         <Button startIcon={mode=="light"? <Brightness4Icon />: <LightModeOutlinedIcon />}
          onClick={()=>setMode(mode=="light"? "dark":"light")}
         style={{marginLeft:"auto"}} color="inherit"> 
@@ -151,6 +153,10 @@ function App(){
         <AddMovie />   
 
         </Route>
+        <Route path="/form">
+        <BasicForm />   
+
+        </Route>
         <Route path="/movies/:id">
         <MovieDetails />
         </Route>
@@ -179,34 +185,4 @@ function App(){
     </ThemeProvider>
   );
 }
-function MovieDetails({movies}){
-  // object destructuring {id}
-  const {id}=useParams();
-  const movie=movies[id]
-  const history=useHistory();
-return (
-<div>
-  <iframe 
-  width="100%"
-   height="360" 
-   src={movie.trailer} 
-   title="YouTube video player"
-    frameborder="0" 
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-   </iframe>
-<div className="movie-detail-container">
-    <div className="movie-specs">
-      <h3 className="movie-name">{movie.name}</h3>
-      <p className="movie-rating">⭐{movie.rating} </p>
-    </div>
-    <p>{movie.summary}</p>
-    <Button variant="contained"
-    onClick={()=>history.goBack()}
-    startIcon={<ArrowBackIosIcon />}>
-      BACK</Button>
-
-    </div>
-    </div>
-    )
- }
 export default App;
