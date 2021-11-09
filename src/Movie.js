@@ -46,7 +46,7 @@ export function Movie({ name, poster, rating, summary,trailer,id,EditMovieButton
 
             <CardActions>
           <Counter />
-          {/* {EditMovieButton} */}
+          {EditMovieButton}
           {DeleteMovieButton} 
 
           </CardActions>

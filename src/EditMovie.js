@@ -14,21 +14,21 @@ export function EditMovie({ movies, setMovies }) {
   const setMovieSummary = (event) => setSummary(event.target.value);
   const setMovieTrailer = (event) => setTrailer(event.target.value);
 
-  const resetMovieForm = () => {
-    setName("");
-    setPoster("");
-    setRating("");
-    setSummary("");
-    setTrailer("")
-  };
-  const addMovie = () => {
+  // const resetMovieForm = () => {
+  //   setName("");
+  //   setPoster("");
+  //   setRating("");
+  //   setSummary("");
+  //   setTrailer("")
+  // };
+  const editMovie = () => {
     console.log({ name, poster, rating, summary ,trailer});
     const newMovie = { name, poster, rating, summary,trailer };
     setMovies([...movies, newMovie]);
-    resetMovieForm();
+    // resetMovieForm();
   };
   return (
-    <div className="add-movie-form">
+    <div className="edit-movie-form">
      
       <TextField
         value={name}
@@ -55,8 +55,8 @@ export function EditMovie({ movies, setMovies }) {
         label="Trailer"
         onChange={setMovieTrailer}
         variant="outlined" />
-      <Button onClick={addMovie} variant="contained">
-        Add Movie
+      <Button onClick={editMovie} variant="contained">
+        Edit Movie
       </Button>
       {/* <button onClick={addMovie}>Add Movie</button> */}
     </div>
