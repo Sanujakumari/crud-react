@@ -121,7 +121,7 @@ export function AddMovie() {
          variant="outlined"
          error= {errors.trailer && touched.trailer}
          helperText= {errors.trailer && touched.trailer && errors.trailer} />
-      <Button type="submit" onClick={addMovie} variant="contained">
+      <Button type="submit"  variant="contained">
         Add Movie
       </Button>
       {/* <button onClick={addMovie}>Add Movie</button> */}

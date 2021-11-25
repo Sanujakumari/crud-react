@@ -6,20 +6,20 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useHistory } from "react-router";
 import {useState,useEffect} from "react"
 
-
+const API_URL="https://sanuja-movie.herokuapp.com/movies/";
 export function MovieList() {
   const history=useHistory();
   const [movies, setMovies] = useState([]);
 
     const getMovies=()=>{
-      fetch("https://6188b885d0821900178d74e6.mockapi.io/movies",{
+      fetch(`${API_URL}`,{
         method:"GET",
       })
       .then((data)=>data.json())
       .then((mvs)=>setMovies(mvs))
     }
     const deleteMovie=(id)=>{
-      fetch("https://6188b885d0821900178d74e6.mockapi.io/movies/" + id,{
+      fetch(`${API_URL}` + id,{
                   method:"DELETE",
                 }).then(()=>getMovies());
     }
@@ -56,7 +56,7 @@ export function MovieList() {
            EditMovieButton={
             <IconButton
             className="movie-show-button"
-            onClick={()=>history.push("/movies/edit/" +mv.id)}
+            onClick={()=>history.push('/movies/edit/' +mv.id)}
 
               color="secondary"
               aria-label="edit">
